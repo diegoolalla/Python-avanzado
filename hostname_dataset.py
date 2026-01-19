@@ -196,8 +196,9 @@ class ServerAnalyzer:
         axes[0].set_title('Distribución de Carga de CPU (%)', fontweight='bold')
         axes[0].set_xlabel('Carga CPU (%)')
         axes[0].set_ylabel('Frecuencia')
-        axes[0].axvline(self.df['carga_cpu_porcentaje'].mean(), color='red', linestyle='--', 
-                       linewidth=2, label=f'Media: {self.df["carga_cpu_porcentaje"].mean():.2f}%')
+        cpu_mean = self.df['carga_cpu_porcentaje'].mean()
+        axes[0].axvline(cpu_mean, color='red', linestyle='--', 
+                       linewidth=2, label=f'Media: {cpu_mean:.2f}%')
         axes[0].legend()
         axes[0].grid(alpha=0.3)
         
@@ -206,8 +207,9 @@ class ServerAnalyzer:
         axes[1].set_title('Distribución de Uso de RAM (%)', fontweight='bold')
         axes[1].set_xlabel('Uso RAM (%)')
         axes[1].set_ylabel('Frecuencia')
-        axes[1].axvline(self.df['uso_ram_porcentaje'].mean(), color='blue', linestyle='--', 
-                       linewidth=2, label=f'Media: {self.df["uso_ram_porcentaje"].mean():.2f}%')
+        ram_mean = self.df['uso_ram_porcentaje'].mean()
+        axes[1].axvline(ram_mean, color='blue', linestyle='--', 
+                       linewidth=2, label=f'Media: {ram_mean:.2f}%')
         axes[1].legend()
         axes[1].grid(alpha=0.3)
         
@@ -228,8 +230,9 @@ class ServerAnalyzer:
         plt.title('Uptime de Servidores', fontsize=16, fontweight='bold')
         plt.xlabel('Índice de Servidor', fontsize=12)
         plt.ylabel('Uptime (días)', fontsize=12)
-        plt.axhline(self.df['uptime_days'].mean(), color='red', linestyle='--', 
-                   linewidth=2, label=f'Media: {self.df["uptime_days"].mean():.2f} días')
+        uptime_mean = self.df['uptime_days'].mean()
+        plt.axhline(uptime_mean, color='red', linestyle='--', 
+                   linewidth=2, label=f'Media: {uptime_mean:.2f} días')
         plt.legend()
         plt.grid(alpha=0.3)
         plt.tight_layout()
@@ -280,7 +283,7 @@ def main():
     print("Generación de Dataset de Hostnames y Análisis")
     print("="*70)
     
-    # Configurar semilla para reproducibilidad (opcional)
+    # Configurar semilla para reproducibilidad (valor arbitrario para resultados consistentes)
     random.seed(42)
     np.random.seed(42)
     
